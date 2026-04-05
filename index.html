@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>FlowRead — Read at the speed of thought</title>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body data-theme="dark">
+
+<div class="err" id="err"></div>
+<div class="adapt-toast" id="adapt-toast"></div>
+<div class="jump-tip" id="jump-tip">▶ READ FROM HERE</div>
+
+<!-- ── TOP TOOLBAR ── -->
+<div class="top-toolbar" id="upload-toolbar">
+  <button class="tbtn" id="theme-upload">☀</button>
+</div>
+<div class="top-toolbar" id="reader-toolbar" style="display:none;">
+  <button class="tbtn" id="sidebar-btn" title="Toggle book">📖</button>
+  <button class="tbtn" id="theme-reader">☀</button>
+  <button class="tbtn" id="settings-btn">⚙</button>
+</div>
+
+<!-- ── SETTINGS PANEL ── -->
+<div class="settings-panel" id="settings-panel">
+  <div class="stitle">Settings</div>
+  <div class="srow">
+    <span>FOCUS LETTER</span>
+    <label class="tog"><input type="checkbox" id="focus-tog" checked/><span class="sl"></span></label>
+  </div>
+  <div class="srow">
+    <span>CHUNK SIZE</span>
+    <select id="chunk-sel" class="ssel">
+      <option value="1" selected>1 word</option>
+      <option value="2">2 words</option>
+      <option value="3">3 words</option>
+    </select>
+  </div>
+  <div class="srow">
+    <span>PAUSE AT PUNCT.</span>
+    <label class="tog"><input type="checkbox" id="punct-tog" checked/><span class="sl"></span></label>
+  </div>
+  <div class="srow desk-only">
+    <span>SIDEBAR WIDTH</span>
+    <select id="sb-width" class="ssel">
+      <option value="260">Narrow</option>
+      <option value="300" selected>Medium</option>
+      <option value="400">Wide</option>
+    </select>
+  </div>
+  <div class="srow">
+    <span>CONTEXT WORDS</span>
+    <label class="tog"><input type="checkbox" id="ctx-tog"/><span class="sl"></span></label>
+  </div>
+  <div class="srow">
+    <span>ADAPTIVE SPEED</span>
+    <label class="tog"><input type="checkbox" id="adapt-tog"/><span class="sl"></span></label>
+  </div>
+</div>
+
+<!-- ══ UPLOAD SCREEN ══ -->
+<div class="screen active" id="upload-screen">
+  <div class="bg-grid"></div>
+  <div class="logo">Flow<span>Read</span></div>
+  <div class="tagline">One word at a time</div>
+
+  <div class="drop-zone" id="drop-zone">
+    <span class="drop-icon">📖</span>
+    <h2>Drop your book here</h2>
+    <p>PDF, EPUB or TXT · tap to browse</p>
+    <input type="file" id="file-input" accept=".pdf,.epub,.txt"/>
+  </div>
+
+  <div class="upload-divider">or</div>
+
+  <div class="paste-zone">
+    <textarea id="paste-input" placeholder="Paste or type any text here…"></textarea>
+    <button id="paste-btn">▶ START READING</button>
+  </div>
+</div>
+
+<!-- ══ READER SCREEN ══ -->
+<div class="screen" id="reader-screen">
+  <div class="toolbar-spacer"></div>
+
+  <div class="reader-body">
+
+    <!-- Sidebar -->
+    <div class="book-sidebar collapsed" id="book-sidebar">
+      <div class="sb-header">
+        <span class="sb-title" id="sb-title">BOOK</span>
+        <span class="sb-hint">SELECT TEXT → JUMP</span>
+      </div>
+      <div class="book-pages" id="book-pages"></div>
+    </div>
+
+    <!-- Word area -->
+    <div class="reader-word-area" id="word-area">
+      <div class="prog-wrap"><div class="prog-bar" id="prog-bar"></div></div>
+
+      <div class="ctx-word" id="ctx-prev"></div>
+      <div id="display-word">READY</div>
+      <div class="ctx-word" id="ctx-next"></div>
+
+      <div class="word-counter" id="word-counter">0 / 0</div>
+
+      <div class="overlay" id="overlay">
+        <big>PAUSED</big>
+        <small>TAP · SPACE · PLAY</small>
+      </div>
+
+      <div class="stats-overlay" id="stats-overlay">
+        <div class="stats-title">COMPLETE</div>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-val" id="stat-wpm">—</div>
+            <div class="stat-lbl">AVG WPM</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val" id="stat-time">—</div>
+            <div class="stat-lbl">TIME</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val" id="stat-words">—</div>
+            <div class="stat-lbl">WORDS</div>
+          </div>
+        </div>
+        <button class="stats-again-btn" id="stats-again">↺ READ AGAIN</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Controls bar -->
+  <div class="controls-bar">
+
+    <!-- Desktop -->
+    <div class="cg desk-only" id="desk-transport">
+      <button class="btn ic" id="restart-btn">⏮</button>
+      <button class="btn primary" id="play-btn">PLAY</button>
+      <button class="btn ic" id="skip-back-btn">⏪</button>
+      <button class="btn ic" id="skip-fwd-btn">⏩</button>
+    </div>
+    <div class="sep desk-only"></div>
+    <div class="cg desk-only">
+      <span class="clabel">WPM</span>
+      <button class="btn ic" id="wpm-dec">−</button>
+      <div class="wpm-num" id="wpm-num">300</div>
+      <button class="btn ic" id="wpm-inc">+</button>
+      <input type="range" id="wpm-range" min="50" max="1000" step="25" value="300"/>
+    </div>
+    <div class="pill desk-only" id="pill">PAUSED</div>
+    <div class="cg ml desk-only">
+      <button class="btn" id="close-btn-desk">✕ CLOSE</button>
+    </div>
+
+    <!-- Mobile -->
+    <div class="mob-row1" id="mob-row1" style="display:none;">
+      <button class="btn ic" id="m-restart">⏮</button>
+      <button class="btn ic" id="m-back">⏪</button>
+      <button class="btn primary" id="m-play">PLAY</button>
+      <button class="btn ic" id="m-fwd">⏩</button>
+      <div class="sep" style="display:block;margin:0 2px;"></div>
+      <span class="clabel">WPM</span>
+      <button class="btn ic" id="m-wdec">−</button>
+      <div class="wpm-num" id="m-wnum">300</div>
+      <button class="btn ic" id="m-winc">+</button>
+    </div>
+    <div class="mob-row2" id="mob-row2" style="display:none;">
+      <input type="range" id="m-wrange" min="50" max="1000" step="25" value="300"/>
+      <div class="pill" id="m-pill">PAUSED</div>
+      <button class="btn ml" id="close-btn-mob">✕</button>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
