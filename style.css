@@ -373,6 +373,20 @@ input[type=range]::-webkit-slider-thumb{
 .pill.on{color:var(--accent);border-color:var(--accent);}
 
 /* ══════════════════════════════════════════
+   LUCIDE ICONS
+══════════════════════════════════════════ */
+.tbtn svg, .btn svg, #paste-btn svg,
+.stats-again-btn svg, .jump-tip svg {
+  width: 1em;
+  height: 1em;
+  stroke: currentColor;
+  vertical-align: middle;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.drop-icon svg { width: 2.6rem; height: 2.6rem; stroke: var(--muted); }
+
+/* ══════════════════════════════════════════
    ERROR
 ══════════════════════════════════════════ */
 .err{

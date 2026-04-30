@@ -47,8 +47,10 @@ window.addEventListener('resize', applyLayout);
 function applyTheme() {
   document.body.setAttribute('data-theme', isDark ? 'dark' : 'light');
   ['theme-upload', 'theme-reader'].forEach(id => {
-    const el = $(id); if (el) el.textContent = isDark ? '☀' : '🌙';
+    const el = $(id);
+    if (el) el.innerHTML = `<i data-lucide="${isDark ? 'sun' : 'moon'}"></i>`;
   });
+  lucide.createIcons();
 }
 $('theme-upload').onclick = $('theme-reader').onclick = () => { isDark = !isDark; applyTheme(); };
 
@@ -71,7 +73,8 @@ $('sb-width').onchange   = e => {
 function setSidebar(open) {
   sidebarOpen = open;
   $('book-sidebar').classList.toggle('collapsed', !open);
-  $('sidebar-btn').textContent = open ? '📕' : '📖';
+  $('sidebar-btn').innerHTML = `<i data-lucide="${open ? 'book' : 'book-open'}"></i>`;
+  lucide.createIcons();
 }
 $('sidebar-btn').onclick = () => setSidebar(!sidebarOpen);
 
@@ -596,4 +599,5 @@ function closeReader() {
 }
 
 // ── Init ──────────────────────────────────────────────────────
+lucide.createIcons();
 applyLayout();

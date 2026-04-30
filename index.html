@@ -12,16 +12,16 @@
 
 <div class="err" id="err"></div>
 <div class="adapt-toast" id="adapt-toast"></div>
-<div class="jump-tip" id="jump-tip">▶ READ FROM HERE</div>
+<div class="jump-tip" id="jump-tip"><i data-lucide="play"></i> READ FROM HERE</div>
 
 <!-- ── TOP TOOLBAR ── -->
 <div class="top-toolbar" id="upload-toolbar">
-  <button class="tbtn" id="theme-upload">☀</button>
+  <button class="tbtn" id="theme-upload"><i data-lucide="sun"></i></button>
 </div>
 <div class="top-toolbar" id="reader-toolbar" style="display:none;">
-  <button class="tbtn" id="sidebar-btn" title="Toggle book">📖</button>
-  <button class="tbtn" id="theme-reader">☀</button>
-  <button class="tbtn" id="settings-btn">⚙</button>
+  <button class="tbtn" id="sidebar-btn" title="Toggle book"><i data-lucide="book-open"></i></button>
+  <button class="tbtn" id="theme-reader"><i data-lucide="sun"></i></button>
+  <button class="tbtn" id="settings-btn"><i data-lucide="settings"></i></button>
 </div>
 
 <!-- ── SETTINGS PANEL ── -->
@@ -68,7 +68,7 @@
   <div class="tagline">One word at a time</div>
 
   <div class="drop-zone" id="drop-zone">
-    <span class="drop-icon">📖</span>
+    <span class="drop-icon"><i data-lucide="book-open"></i></span>
     <h2>Drop your book here</h2>
     <p>PDF, EPUB or TXT · tap to browse</p>
     <input type="file" id="file-input" accept=".pdf,.epub,.txt"/>
@@ -78,7 +78,7 @@
 
   <div class="paste-zone">
     <textarea id="paste-input" placeholder="Paste or type any text here…"></textarea>
-    <button id="paste-btn">▶ START READING</button>
+    <button id="paste-btn"><i data-lucide="play"></i> START READING</button>
   </div>
 </div>
 
@@ -128,7 +128,7 @@
             <div class="stat-lbl">WORDS</div>
           </div>
         </div>
-        <button class="stats-again-btn" id="stats-again">↺ READ AGAIN</button>
+        <button class="stats-again-btn" id="stats-again"><i data-lucide="rotate-ccw"></i> READ AGAIN</button>
       </div>
     </div>
 
@@ -139,40 +139,40 @@
 
     <!-- Desktop -->
     <div class="cg desk-only" id="desk-transport">
-      <button class="btn ic" id="restart-btn">⏮</button>
+      <button class="btn ic" id="restart-btn"><i data-lucide="skip-back"></i></button>
       <button class="btn primary" id="play-btn">PLAY</button>
-      <button class="btn ic" id="skip-back-btn">⏪</button>
-      <button class="btn ic" id="skip-fwd-btn">⏩</button>
+      <button class="btn ic" id="skip-back-btn"><i data-lucide="chevrons-left"></i></button>
+      <button class="btn ic" id="skip-fwd-btn"><i data-lucide="chevrons-right"></i></button>
     </div>
     <div class="sep desk-only"></div>
     <div class="cg desk-only">
       <span class="clabel">WPM</span>
-      <button class="btn ic" id="wpm-dec">−</button>
+      <button class="btn ic" id="wpm-dec"><i data-lucide="minus"></i></button>
       <div class="wpm-num" id="wpm-num">300</div>
-      <button class="btn ic" id="wpm-inc">+</button>
+      <button class="btn ic" id="wpm-inc"><i data-lucide="plus"></i></button>
       <input type="range" id="wpm-range" min="50" max="1000" step="25" value="300"/>
     </div>
     <div class="pill desk-only" id="pill">PAUSED</div>
     <div class="cg ml desk-only">
-      <button class="btn" id="close-btn-desk">✕ CLOSE</button>
+      <button class="btn" id="close-btn-desk"><i data-lucide="x"></i> CLOSE</button>
     </div>
 
     <!-- Mobile -->
     <div class="mob-row1" id="mob-row1" style="display:none;">
-      <button class="btn ic" id="m-restart">⏮</button>
-      <button class="btn ic" id="m-back">⏪</button>
+      <button class="btn ic" id="m-restart"><i data-lucide="skip-back"></i></button>
+      <button class="btn ic" id="m-back"><i data-lucide="chevrons-left"></i></button>
       <button class="btn primary" id="m-play">PLAY</button>
-      <button class="btn ic" id="m-fwd">⏩</button>
+      <button class="btn ic" id="m-fwd"><i data-lucide="chevrons-right"></i></button>
       <div class="sep" style="display:block;margin:0 2px;"></div>
       <span class="clabel">WPM</span>
-      <button class="btn ic" id="m-wdec">−</button>
+      <button class="btn ic" id="m-wdec"><i data-lucide="minus"></i></button>
       <div class="wpm-num" id="m-wnum">300</div>
-      <button class="btn ic" id="m-winc">+</button>
+      <button class="btn ic" id="m-winc"><i data-lucide="plus"></i></button>
     </div>
     <div class="mob-row2" id="mob-row2" style="display:none;">
       <input type="range" id="m-wrange" min="50" max="1000" step="25" value="300"/>
       <div class="pill" id="m-pill">PAUSED</div>
-      <button class="btn ml" id="close-btn-mob">✕</button>
+      <button class="btn ml" id="close-btn-mob"><i data-lucide="x"></i></button>
     </div>
 
   </div>
@@ -180,6 +180,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
